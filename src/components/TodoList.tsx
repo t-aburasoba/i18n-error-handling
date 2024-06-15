@@ -1,12 +1,6 @@
-"use client"
+'use client';
 import React from 'react';
-
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import { Todo } from '@/types/Todo';
 
 interface TodoListProps {
   todos: Todo[];
@@ -14,21 +8,27 @@ interface TodoListProps {
 
 export const TodoList = ({ todos }: TodoListProps) => {
   return (
-    <ul style={{ padding: '0', listStyleType: 'none' }}>
-      {todos.map((todo, index) => (
+    <ul className="p-0 list-none">
+      {todos.map((todo) => (
         <li
           key={todo.id}
-          style={{
-            margin: '10px 0',
-            padding: '10px',
-            backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#e9e9e9',
-            borderBottom: '1px solid #ccc',
-            borderRadius: '5px',
-          }}
+          className="my-2 p-2 border border-gray-300 rounded-lg flex items-center"
         >
-          <span style={{ fontWeight: 'bold', color: todo.completed ? 'green' : 'red' }}>{todo.title}</span> - {todo.completed ? "Completed" : "Not completed"}
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => null}
+            className="mr-2"
+          />
+          <span
+            className={`font-bold ${
+              todo.completed ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {todo.title}
+          </span>
         </li>
       ))}
     </ul>
   );
-}
+};
